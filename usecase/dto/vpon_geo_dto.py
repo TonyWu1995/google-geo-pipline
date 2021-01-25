@@ -4,13 +4,14 @@ from util.string_util import calc_geo_name
 
 class VponGeoDTO:
 
-    def __init__(self, tier1_name, tier2_name, tier3_name, tier_id1, tier_id2, tier_id3):
-        self._tier1_name = tier1_name
-        self._tier2_name = tier2_name
-        self._tier3_name = tier3_name
-        self._tier_id1 = tier_id1
-        self._tier_id2 = tier_id2
-        self._tier_id3 = tier_id3
+    def __init__(self, tier1_name, tier2_name, tier3_name, tier_id1, tier_id2, tier_id3, country_code):
+        self.tier1_name = tier1_name
+        self.tier2_name = tier2_name
+        self.tier3_name = tier3_name
+        self.tier_id1 = tier_id1
+        self.tier_id2 = tier_id2
+        self.tier_id3 = tier_id3
+        self.country_code = country_code
 
     @staticmethod
     def build_vpon_geo_list(vpon_geo_table: list):
@@ -24,7 +25,7 @@ class VponGeoDTO:
         tier_id1 = VponGeoDTO.__check_is_empty_and_equal_two_hyphen(vpon_geo_list[6])
         tier_id2 = VponGeoDTO.__check_is_empty_and_equal_two_hyphen(vpon_geo_list[7])
         tier_id3 = VponGeoDTO.__check_is_empty_and_equal_two_hyphen(vpon_geo_list[8])
-        return VponGeoDTO(tier1, tier2, tier3, tier_id1, tier_id2, tier_id3)
+        return VponGeoDTO(tier1, tier2, tier3, tier_id1, tier_id2, tier_id3, vpon_geo_list[9])
 
     @staticmethod
     def __check_is_empty_and_equal_two_hyphen(s: str):

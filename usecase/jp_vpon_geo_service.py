@@ -29,8 +29,8 @@ class JPVponGeoService(GeneralVponGeoService):
                 len(google_geo_dto_list), len(vpon_geo_list), country_code))
         return super().generate(google_geo_dto_list, vpon_geo_list, country_code)
 
-    def filter_match(self, calc_result_list, name_list):
-        if tuple(name_list) in sepcial_dict:
-            return sepcial_dict[tuple(name_list)]
-        result = [super().filter_match(calc_result_list, name_list)]
+    def filter_match(self, calc_result_list, google_geo_name_list):
+        if tuple(google_geo_name_list) in sepcial_dict:
+            return sepcial_dict[tuple(google_geo_name_list)]
+        result = [super().filter_match(calc_result_list, google_geo_name_list)]
         return result[0] if len(result) > 0 else []
