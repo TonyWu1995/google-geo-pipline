@@ -107,6 +107,7 @@ class GeneralVponGeoService:
     def __normalize_vpon_geo(self, s: str):
         return self.__calc_geo_name(s.split(',')[0].split(' '))
 
+    #TODO rm
     def format_vpon_goe_list(self, vpon_geo_list: list, country_code: str):
         vpon_geo_list = [row for row in vpon_geo_list if row[9] == country_code]
         for row in vpon_geo_list:

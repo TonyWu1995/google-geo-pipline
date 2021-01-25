@@ -36,35 +36,36 @@ def main(config_file_path, version):
     vpon_geo_service = GeneralVponGeoService()
     country_code_set.remove('HK')
     country_code_set.remove("JP")
-    vpon_geo_domain_list = [vpon_geo_service.generate(google_geo_dto_list, vpon_geo_list, country_code) for country_code
-                            in list(country_code_set)]
+    vpon_geo_domain_list = vpon_geo_service.generate(google_geo_dto_list, vpon_geo_list, "TW")
+    # vpon_geo_domain_list = [vpon_geo_service.generate(google_geo_dto_list, vpon_geo_list, country_code) for country_code
+    #                         in list(country_code_set)]
     # # general
-    vpon_geo_domain_list = [vpon_geo_domain for row in vpon_geo_domain_list for vpon_geo_domain in
-                            row]
-    # # hk
-    hk_vpon_geo_service = HKVponGeoService()
-    hk_vpon_geo_list = hk_vpon_geo_service.generate(hk_geo_list)
-    # # jp
-    jp_vpon_geo_service = JPVponGeoService()
-    jp_vpon_geo_list = jp_vpon_geo_service.generate(google_geo_dto_list, vpon_geo_list)
-    vpon_geo_domain_list = vpon_geo_domain_list + hk_vpon_geo_list + jp_vpon_geo_list
-    log.info("build() vpon_geo_domain_list size={} google size={}".format(len(vpon_geo_domain_list),
-                                                                          len(google_geo_dto_list)))
-    verify_geo_service = VerifyGeoService()
-    #
-    result = verify_geo_service.verify(vpon_geo_domain_list, prebid_list)
-    #
-    log.info("verify correct count={}, error count={}, missing id={}, id in prebid rate={}".format(result[0], result[1],
-                                                                                                result[2], result[3]))
-    # # # save and export to repo
-    conf_file_name = 'doubleclick-{}.conf'.format(version)
-    double_click_template = DoubleClickTemplate()
-    save_file(conf_file_name, double_click_template.build(vpon_geo_domain_list))
-    # # todo upload
-    #
-    ftp_service = FTPService(FTPConfig.build(load_config(config_file_path, 'ftp-config')))
-    conf_file_path = "./" + conf_file_name
-    ftp_service.upload_file(conf_file_name, open(conf_file_path, 'rb'))
+    # vpon_geo_domain_list = [vpon_geo_domain for row in vpon_geo_domain_list for vpon_geo_domain in
+    #                         row]
+    # # # hk
+    # hk_vpon_geo_service = HKVponGeoService()
+    # hk_vpon_geo_list = hk_vpon_geo_service.generate(hk_geo_list)
+    # # # jp
+    # jp_vpon_geo_service = JPVponGeoService()
+    # jp_vpon_geo_list = jp_vpon_geo_service.generate(google_geo_dto_list, vpon_geo_list)
+    # vpon_geo_domain_list = vpon_geo_domain_list + hk_vpon_geo_list + jp_vpon_geo_list
+    # log.info("build() vpon_geo_domain_list size={} google size={}".format(len(vpon_geo_domain_list),
+    #                                                                       len(google_geo_dto_list)))
+    # verify_geo_service = VerifyGeoService()
+    # #
+    # result = verify_geo_service.verify(vpon_geo_domain_list, prebid_list)
+    # #
+    # log.info("verify correct count={}, error count={}, missing id={}, id in prebid rate={}".format(result[0], result[1],
+    #                                                                                             result[2], result[3]))
+    # # # # save and export to repo
+    # conf_file_name = 'doubleclick-{}.conf'.format(version)
+    # double_click_template = DoubleClickTemplate()
+    # save_file(conf_file_name, double_click_template.build(vpon_geo_domain_list))
+    # # # todo upload
+    # #
+    # ftp_service = FTPService(FTPConfig.build(load_config(config_file_path, 'ftp-config')))
+    # conf_file_path = "./" + conf_file_name
+    # ftp_service.upload_file(conf_file_name, open(conf_file_path, 'rb'))
 
 
 if __name__ == '__main__':
