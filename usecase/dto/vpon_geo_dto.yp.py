@@ -1,4 +1,5 @@
 from util.string import String
+from util.string_util import calc_geo_name
 
 
 class VponGeoDTO:
@@ -31,4 +32,4 @@ class VponGeoDTO:
 
     @staticmethod
     def __normalize_vpon_geo(s: str):
-        return s.split(',')[0].split(' ')
+        return calc_geo_name(s.split(',')[0].split(' '))

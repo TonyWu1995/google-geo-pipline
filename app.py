@@ -25,18 +25,20 @@ def main(config_file_path, version):
     # step 0 read google and vpon geo file
     google_geo_table = read_csv(double_click_config.google_geo_path)
     vpon_geo_table = read_vpon_geo_excel(double_click_config.vpon_geo_path)
-    hk_geo_list = read_excel(double_click_config.hk_google_vpon_geo_path).values.tolist()
-    prebid_list = read_csv(double_click_config.prebid_path).values.tolist()
+    # hk_geo_list = read_excel(double_click_config.hk_google_vpon_geo_path).values.tolist()
+    # prebid_list = read_csv(double_click_config.prebid_path).values.tolist()
     # # step 1 build country code
     google_geo_dto_list = GoogleGeoDTO.build_google_geo_list(google_geo_table.values.tolist())
-    country_code_set = set(google_geo_dto.country_code for google_geo_dto in google_geo_dto_list)
-    vpon_geo_list = vpon_geo_table.values.tolist()
+    for row in google_geo_dto_list:
+        print(row.__dict__)
+    # country_code_set = set(google_geo_dto.country_code for google_geo_dto in google_geo_dto_list)
+    # vpon_geo_list = vpon_geo_table.values.tolist()
     #
     # # # step2 match
-    vpon_geo_service = GeneralVponGeoService()
-    country_code_set.remove('HK')
-    country_code_set.remove("JP")
-    vpon_geo_domain_list = vpon_geo_service.generate(google_geo_dto_list, vpon_geo_list, "TW")
+    # vpon_geo_service = GeneralVponGeoService()
+    # country_code_set.remove('HK')
+    # country_code_set.remove("JP")
+    # vpon_geo_domain_list = vpon_geo_service.generate(google_geo_dto_list, vpon_geo_list, "TW")
     # vpon_geo_domain_list = [vpon_geo_service.generate(google_geo_dto_list, vpon_geo_list, country_code) for country_code
     #                         in list(country_code_set)]
     # # general

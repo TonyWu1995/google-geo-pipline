@@ -82,7 +82,9 @@ class GeneralVponGeoService:
         result = [i for row in result for i in row]
         return result.count(result[0]) if len(result) > 0 else 0
 
+    # TODO rm
     def format_google_geo_dto_dict(self, google_geo_dto_list, country_code: str):
+        # TODO refactor to generate
         google_geo_dto_dict = {google_geo_dto.criteria_id: google_geo_dto for google_geo_dto in google_geo_dto_list if
                                google_geo_dto.country_code == country_code}
         for key, google_geo_dto in google_geo_dto_dict.items():
@@ -92,9 +94,11 @@ class GeneralVponGeoService:
             google_geo_dto.name = google_geo_dto_name_list
         return google_geo_dto_dict
 
+    # TODO rm
     def __normalize_google_geo(self, name: str):
         return self.__calc_geo_name(name.split(' '))
 
+    # TODO rm
     def __calc_geo_name(self, name_list):
         common = set(name_list).intersection(self.tag_label)
         for tag in common:
@@ -104,11 +108,13 @@ class GeneralVponGeoService:
             return special_geo_name_dict[name]
         return name
 
+    # TODO rm
     def __normalize_vpon_geo(self, s: str):
         return self.__calc_geo_name(s.split(',')[0].split(' '))
 
-    #TODO rm
+    # TODO rm
     def format_vpon_goe_list(self, vpon_geo_list: list, country_code: str):
+        # TODO refactor to generate
         vpon_geo_list = [row for row in vpon_geo_list if row[9] == country_code]
         for row in vpon_geo_list:
             # tier1 tier2 tier3
