@@ -1,5 +1,5 @@
 class VponGeoDomain:
-
+    # TODO google vpon path
     def __init__(self, criteria_id=None, tier1=None, tier2=None, tier3=None):
         self._criteria_id = criteria_id
         self._tier1 = tier1
@@ -52,4 +52,3 @@ class VponGeoDomain:
             return VponGeoDomain(int(criteria_id),
                                  int(tier_3))
         return None
-
