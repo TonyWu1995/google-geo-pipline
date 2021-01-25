@@ -1,5 +1,5 @@
 class VponGeoDomain:
-    # TODO google vpon path
+
     def __init__(self, criteria_id=None, tier1=None, tier2=None, tier3=None, vpon_geo_name="", google_geo_name=""):
         self._criteria_id = criteria_id
         self._tier1 = tier1
@@ -7,9 +7,6 @@ class VponGeoDomain:
         self._tier3 = tier3
         self._vpon_geo_name = vpon_geo_name
         self._google_geo_name = google_geo_name
-
-    def is_geo_name_equal(self) -> bool:
-        return
 
     @property
     def criteria_id(self):

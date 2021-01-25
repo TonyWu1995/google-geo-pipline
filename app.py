@@ -35,28 +35,28 @@ def main(config_file_path, version):
     vpon_geo_dto_list = VponGeoDTO.build_vpon_geo_list(vpon_geo_table.values.tolist())
 
     # # # step2 match
-    # vpon_geo_service = GeneralVponGeoService()
-    # country_code_set.remove('HK')
-    # vpon_geo_domain_list = [vpon_geo_service.generate(google_geo_dto_list, vpon_geo_dto_list, country_code) for
-    #                         country_code
-    #                         in list(country_code_set)]
+    vpon_geo_service = GeneralVponGeoService()
+    country_code_set.remove('HK')
+    vpon_geo_domain_list = [vpon_geo_service.generate(google_geo_dto_list, vpon_geo_dto_list, country_code) for
+                            country_code
+                            in list(country_code_set)]
     # # # general
-    # vpon_geo_domain_list = [vpon_geo_domain for row in vpon_geo_domain_list for vpon_geo_domain in
-    #                         row]
+    vpon_geo_domain_list = [vpon_geo_domain for row in vpon_geo_domain_list for vpon_geo_domain in
+                            row]
     # hk
     hk_vpon_geo_service = HKVponGeoService()
     hk_vpon_geo_list = hk_vpon_geo_service.generate(hk_geo_list)
-    # vpon_geo_domain_list
-    vpon_geo_domain_list = hk_vpon_geo_list
-    # log.info("build() vpon_geo_domain_list size={} google size={}".format(len(vpon_geo_domain_list),
-    #                                                                       len(google_geo_dto_list)))
-    # verify_geo_service = VerifyGeoService()
-    # result = verify_geo_service.verify(vpon_geo_domain_list, read_csv(double_click_config.prebid_path).values.tolist())
     #
-    # log.info("verify correct count={}, error list={}, id in prebid rate={}".format(result[0], result[1],
-    #                                                                                result[2],
-    #                                                                                ))
-    #
+    vpon_geo_domain_list = vpon_geo_domain_list+hk_vpon_geo_list
+    log.info("build() vpon_geo_domain_list size={} google size={}".format(len(vpon_geo_domain_list),
+                                                                          len(google_geo_dto_list)))
+    verify_geo_service = VerifyGeoService()
+    result = verify_geo_service.verify(vpon_geo_domain_list, read_csv(double_click_config.prebid_path).values.tolist())
+
+    log.info("verify correct count={}, error list={}, id in prebid rate={}".format(result[0], result[1],
+                                                                                   result[2],
+                                                                                   ))
+
     s = GenerateVerifySpecService()
     result = s.generate(vpon_geo_domain_list)
     for row in result:
