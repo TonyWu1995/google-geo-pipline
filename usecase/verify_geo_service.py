@@ -22,7 +22,6 @@ class VerifyGeoService:
                                                         JP_MATCH_DICT)
         correct_count = hk_correct_count + tw_correct_count + jp_correct_count
         error_list = hk_error_list + tw_error_list + jp_error_list
-
         return correct_count, error_list, self.__verify_prebid(vpon_geo_domain_dict,
                                                                prebid_list)
 

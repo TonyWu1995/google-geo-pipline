@@ -8,6 +8,9 @@ class VponGeoDomain:
         self._vpon_geo_name = vpon_geo_name
         self._google_geo_name = google_geo_name
 
+    def is_geo_name_equal(self) -> bool:
+        return
+
     @property
     def criteria_id(self):
         return self._criteria_id
