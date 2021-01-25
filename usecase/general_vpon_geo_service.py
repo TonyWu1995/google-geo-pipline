@@ -15,7 +15,8 @@ special_geo_name_dict = {
     'Hualien Airport': 'Hualien County',
 }
 
-#JP error
+
+# JP error todo rm
 # sepcial_dict = {
 #     ('Japan', 'Shiga', 'Konan'): ['', '', '', '', '', None, 0, 38, 74, 'JP'],
 #     ('Japan', 'Gifu', 'Ikeda'): ['', '', '', '', '', None, 0, 38, 47, 'JP'],
@@ -65,7 +66,9 @@ class GeneralVponGeoService:
             if len(match_list) > 0:
                 vpon_geo_dto = match_list[0]
                 vpon_domain = VponGeoDomain.build(key, vpon_geo_dto.tier_id1, vpon_geo_dto.tier_id2,
-                                                  vpon_geo_dto.tier_id3)
+                                                  vpon_geo_dto.tier_id3,
+                                                  [vpon_geo_dto.tier1_name, vpon_geo_dto.tier2_name,
+                                                   vpon_geo_dto.tier3_name], google_geo_dto.name_list)
                 result.append(vpon_domain)
             else:
                 vpon_domain = VponGeoDomain.build(key, 0, 0, 0)

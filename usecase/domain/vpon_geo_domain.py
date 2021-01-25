@@ -25,7 +25,7 @@ class VponGeoDomain:
         return self._tier3
 
     @staticmethod
-    def build(criteria_id, tier_1, tier_2, tier_3, vpon_geo_name, google_geo_name):
+    def build(criteria_id, tier_1, tier_2, tier_3, vpon_geo_name="", google_geo_name=""):
         # default
         if tier_1 == 0 and tier_2 == 0 and tier_3 == 0:
             return VponGeoDomain(int(criteria_id),
