@@ -4,7 +4,8 @@ from util.string_util import calc_geo_name
 
 class VponGeoDTO:
 
-    def __init__(self, tier1_name, tier2_name, tier3_name, tier_id1, tier_id2, tier_id3, country_code):
+    def __init__(self, name, tier1_name, tier2_name, tier3_name, tier_id1, tier_id2, tier_id3, country_code):
+        self.name = name
         self.tier1_name = tier1_name
         self.tier2_name = tier2_name
         self.tier3_name = tier3_name
@@ -25,7 +26,7 @@ class VponGeoDTO:
         tier_id1 = VponGeoDTO.__check_is_empty_and_equal_two_hyphen(vpon_geo_list[6])
         tier_id2 = VponGeoDTO.__check_is_empty_and_equal_two_hyphen(vpon_geo_list[7])
         tier_id3 = VponGeoDTO.__check_is_empty_and_equal_two_hyphen(vpon_geo_list[8])
-        return VponGeoDTO(tier1, tier2, tier3, tier_id1, tier_id2, tier_id3, vpon_geo_list[9])
+        return VponGeoDTO(vpon_geo_list[0], tier1, tier2, tier3, tier_id1, tier_id2, tier_id3, vpon_geo_list[9])
 
     @staticmethod
     def __check_is_empty_and_equal_two_hyphen(s: str):

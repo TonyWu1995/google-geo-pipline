@@ -40,43 +40,41 @@ class GeneralVponGeoService:
     def match(self, google_geo_dto_dict, vpon_geo_dto_list):
         result = []
         for key, google_geo_dto in google_geo_dto_dict.items():
-            # calc_result_list = [
-            #     [self.calc_match_count(google_geo_dto.name_list, [vpon_geo[3], vpon_geo[4], vpon_geo[5]]), vpon_geo]
-            #     for vpon_geo in vpon_geo_dto_list]
             calc_result_list = [
                 [self.calc_match_count(google_geo_dto.name_list,
                                        [vpon_geo.tier1_name, vpon_geo.tier2_name, vpon_geo.tier3_name]), vpon_geo]
                 for vpon_geo in vpon_geo_dto_list]
             max_value = max(result[0] for result in calc_result_list)
             calc_result_list = [row[1] for row in calc_result_list if row[0] == max_value]
-            match = self.filter_match(calc_result_list, google_geo_dto.name_list)
-            print(match)
-            # if len(match) > 0:
-            #     vpon_domain = VponGeoDomain.build(key, match[7], match[8], match[6])
-            #     result.append(vpon_domain)
-            # else:
-            #     vpon_domain = VponGeoDomain.build(key, 0, 0, 0)
-            #     result.append(vpon_domain)
+            match_list = self.filter_match(calc_result_list, google_geo_dto.name_list)
+            if len(match_list) > 0:
+                vpon_geo_dto = match_list[0]
+                vpon_domain = VponGeoDomain.build(key, vpon_geo_dto.tier_id1, vpon_geo_dto.tier_id2,
+                                                  vpon_geo_dto.tier_id3)
+                result.append(vpon_domain)
+            else:
+                vpon_domain = VponGeoDomain.build(key, 0, 0, 0)
+                result.append(vpon_domain)
         return result
 
     def filter_match(self, calc_result_list, google_geo_name_list):
         result = []
         for i in range(0, len(google_geo_name_list)):
             match = [row for row in calc_result_list if
-                     row[0] == google_geo_name_list[len(google_geo_name_list) - i - 1] or row[0] ==
+                     row.name == google_geo_name_list[len(google_geo_name_list) - i - 1] or row.name ==
                      google_geo_name_list[len(google_geo_name_list) - i - 1].split(' ')[0]]
             if len(match) > 0:
                 result.append(match[0])
                 break
         for i in range(0, len(google_geo_name_list)):
             match = [row for row in calc_result_list if
-                     row[0].split(' ')[0] == google_geo_name_list[len(google_geo_name_list) - i - 1] or
-                     row[0].split(' ')[0] ==
+                     row.name.split(' ')[0] == google_geo_name_list[len(google_geo_name_list) - i - 1] or
+                     row.name.split(' ')[0] ==
                      google_geo_name_list[len(google_geo_name_list) - i - 1].split(' ')[0]]
             if len(match) > 0:
                 result.append(match[0])
                 break
-        return result[0] if len(result) > 0 else []
+        return [result[0]] if len(result) > 0 else []
 
     # TODO refactor
     def calc_match_count(self, google_geo_name, vpon_tier_list):
@@ -88,7 +86,6 @@ class GeneralVponGeoService:
                     match_list.append(vpon_tier_list)
                     break
             result.append(match_list)
-
         result = [i for row in result for i in row]
         return result.count(result[0]) if len(result) > 0 else 0
 
@@ -101,4 +98,3 @@ class GeneralVponGeoService:
     #     if name in special_geo_name_dict:
     #         return special_geo_name_dict[name]
     #     return name
-    #
