@@ -69,59 +69,59 @@ class GeneralVponGeoService:
                 break
         return result[0] if len(result) > 0 else []
 
-    # TODO refactor
-    def calc_match_count(self, geo_name, tier_list):
-        result = []
-        for i in range(0, len(tier_list)):
-            match_list = []
-            for j in range(i, len(geo_name)):
-                if geo_name[j] == tier_list[i]:
-                    match_list.append(tier_list)
-                    break
-            result.append(match_list)
-        result = [i for row in result for i in row]
-        return result.count(result[0]) if len(result) > 0 else 0
-
-    # TODO rm
-    def format_google_geo_dto_dict(self, google_geo_dto_list, country_code: str):
-        # TODO refactor to generate
-        google_geo_dto_dict = {google_geo_dto.criteria_id: google_geo_dto for google_geo_dto in google_geo_dto_list if
-                               google_geo_dto.country_code == country_code}
-        for key, google_geo_dto in google_geo_dto_dict.items():
-            google_geo_dto_name_list = [self.__normalize_google_geo(geo_name) for geo_name in
-                                        google_geo_dto.name.split(',')]
-            google_geo_dto_name_list.reverse()
-            google_geo_dto.name = google_geo_dto_name_list
-        return google_geo_dto_dict
-
-    # TODO rm
-    def __normalize_google_geo(self, name: str):
-        return self.__calc_geo_name(name.split(' '))
-
-    # TODO rm
-    def __calc_geo_name(self, name_list):
-        common = set(name_list).intersection(self.tag_label)
-        for tag in common:
-            name_list.remove(tag)
-        name = ' '.join(name_list)
-        if name in special_geo_name_dict:
-            return special_geo_name_dict[name]
-        return name
-
-    # TODO rm
-    def __normalize_vpon_geo(self, s: str):
-        return self.__calc_geo_name(s.split(',')[0].split(' '))
-
-    # TODO rm
-    def format_vpon_goe_list(self, vpon_geo_list: list, country_code: str):
-        # TODO refactor to generate
-        vpon_geo_list = [row for row in vpon_geo_list if row[9] == country_code]
-        for row in vpon_geo_list:
-            # tier1 tier2 tier3
-            row[3] = None if self.__normalize_vpon_geo(row[3]) == '--' else self.__normalize_vpon_geo(row[3])
-            row[4] = None if self.__normalize_vpon_geo(row[4]) == '--' else self.__normalize_vpon_geo(row[4])
-            row[5] = None if self.__normalize_vpon_geo(row[5]) == '--' else self.__normalize_vpon_geo(row[5])
-            row[6] = 0 if row[6] == '--' or row[6] == '' else int(row[6])
-            row[7] = 0 if row[7] == '--' or row[6] == '' else int(row[7])
-            row[8] = 0 if row[8] == '--' or row[6] == '' else int(row[8])
-        return vpon_geo_list
+    # # TODO refactor
+    # def calc_match_count(self, geo_name, tier_list):
+    #     result = []
+    #     for i in range(0, len(tier_list)):
+    #         match_list = []
+    #         for j in range(i, len(geo_name)):
+    #             if geo_name[j] == tier_list[i]:
+    #                 match_list.append(tier_list)
+    #                 break
+    #         result.append(match_list)
+    #     result = [i for row in result for i in row]
+    #     return result.count(result[0]) if len(result) > 0 else 0
+    #
+    # # TODO rm
+    # def format_google_geo_dto_dict(self, google_geo_dto_list, country_code: str):
+    #     # TODO refactor to generate
+    #     google_geo_dto_dict = {google_geo_dto.criteria_id: google_geo_dto for google_geo_dto in google_geo_dto_list if
+    #                            google_geo_dto.country_code == country_code}
+    #     for key, google_geo_dto in google_geo_dto_dict.items():
+    #         google_geo_dto_name_list = [self.__normalize_google_geo(geo_name) for geo_name in
+    #                                     google_geo_dto.name.split(',')]
+    #         google_geo_dto_name_list.reverse()
+    #         google_geo_dto.name = google_geo_dto_name_list
+    #     return google_geo_dto_dict
+    #
+    # # TODO rm
+    # def __normalize_google_geo(self, name: str):
+    #     return self.__calc_geo_name(name.split(' '))
+    #
+    # # TODO rm
+    # def __calc_geo_name(self, name_list):
+    #     common = set(name_list).intersection(self.tag_label)
+    #     for tag in common:
+    #         name_list.remove(tag)
+    #     name = ' '.join(name_list)
+    #     if name in special_geo_name_dict:
+    #         return special_geo_name_dict[name]
+    #     return name
+    #
+    # # TODO rm
+    # def __normalize_vpon_geo(self, s: str):
+    #     return self.__calc_geo_name(s.split(',')[0].split(' '))
+    #
+    # # TODO rm
+    # def format_vpon_goe_list(self, vpon_geo_list: list, country_code: str):
+    #     # TODO refactor to generate
+    #     vpon_geo_list = [row for row in vpon_geo_list if row[9] == country_code]
+    #     for row in vpon_geo_list:
+    #         # tier1 tier2 tier3
+    #         row[3] = None if self.__normalize_vpon_geo(row[3]) == '--' else self.__normalize_vpon_geo(row[3])
+    #         row[4] = None if self.__normalize_vpon_geo(row[4]) == '--' else self.__normalize_vpon_geo(row[4])
+    #         row[5] = None if self.__normalize_vpon_geo(row[5]) == '--' else self.__normalize_vpon_geo(row[5])
+    #         row[6] = 0 if row[6] == '--' or row[6] == '' else int(row[6])
+    #         row[7] = 0 if row[7] == '--' or row[6] == '' else int(row[7])
+    #         row[8] = 0 if row[8] == '--' or row[6] == '' else int(row[8])
+    #     return vpon_geo_list

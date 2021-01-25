@@ -13,6 +13,10 @@ class VponGeoDTO:
         self._tier_id3 = tier_id3
 
     @staticmethod
+    def build_vpon_geo_list(vpon_geo_table: list):
+        return [VponGeoDTO.build(vpon_geo_list) for vpon_geo_list in vpon_geo_table]
+
+    @staticmethod
     def build(vpon_geo_list):
         tier1 = VponGeoDTO.__check_is_equal_two_hyphen(VponGeoDTO.__normalize_vpon_geo(vpon_geo_list[3]))
         tier2 = VponGeoDTO.__check_is_equal_two_hyphen(VponGeoDTO.__normalize_vpon_geo(vpon_geo_list[4]))
