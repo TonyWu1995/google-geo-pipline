@@ -59,9 +59,9 @@ def main(config_file_path, version):
     # log.info("verify correct count={}, error count={}, missing id={}, id in prebid rate={}".format(result[0], result[1],
     #                                                                                             result[2], result[3]))
     # # # # save and export to repo
-    # conf_file_name = 'doubleclick-{}.conf'.format(version)
-    # double_click_template = DoubleClickTemplate()
-    # save_file(conf_file_name, double_click_template.build(vpon_geo_domain_list))
+    conf_file_name = 'doubleclick-{}.conf'.format(version)
+    double_click_template = DoubleClickTemplate()
+    save_file(conf_file_name, double_click_template.build(vpon_geo_domain_list))
     # # # todo upload
     # #
     # ftp_service = FTPService(FTPConfig.build(load_config(config_file_path, 'ftp-config')))

@@ -23,9 +23,9 @@ class VponGeoDTO:
         tier1 = VponGeoDTO.__check_is_equal_two_hyphen(VponGeoDTO.__normalize_vpon_geo(vpon_geo_list[3]))
         tier2 = VponGeoDTO.__check_is_equal_two_hyphen(VponGeoDTO.__normalize_vpon_geo(vpon_geo_list[4]))
         tier3 = VponGeoDTO.__check_is_equal_two_hyphen(VponGeoDTO.__normalize_vpon_geo(vpon_geo_list[5]))
-        tier_id1 = VponGeoDTO.__check_is_empty_and_equal_two_hyphen(vpon_geo_list[6])
-        tier_id2 = VponGeoDTO.__check_is_empty_and_equal_two_hyphen(vpon_geo_list[7])
-        tier_id3 = VponGeoDTO.__check_is_empty_and_equal_two_hyphen(vpon_geo_list[8])
+        tier_id1 = VponGeoDTO.__check_is_empty_and_equal_two_hyphen(vpon_geo_list[7])
+        tier_id2 = VponGeoDTO.__check_is_empty_and_equal_two_hyphen(vpon_geo_list[8])
+        tier_id3 = VponGeoDTO.__check_is_empty_and_equal_two_hyphen(vpon_geo_list[6])
         return VponGeoDTO(vpon_geo_list[0], tier1, tier2, tier3, tier_id1, tier_id2, tier_id3, vpon_geo_list[9])
 
     @staticmethod
