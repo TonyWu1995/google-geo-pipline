@@ -4,6 +4,7 @@ from usecase.domain.vpon_geo_domain import VponGeoDomain
 
 log = logging.getLogger(__name__)
 
+# TODO rm
 special_geo_name_dict = {
     'Republic of the Congo': 'Congo',
     'North Macedonia': 'Macedonia (FYROM)',
@@ -14,9 +15,23 @@ special_geo_name_dict = {
     'Hualien Airport': 'Hualien County',
 }
 
+#JP error
+# sepcial_dict = {
+#     ('Japan', 'Shiga', 'Konan'): ['', '', '', '', '', None, 0, 38, 74, 'JP'],
+#     ('Japan', 'Gifu', 'Ikeda'): ['', '', '', '', '', None, 0, 38, 47, 'JP'],
+#     ('Japan', 'Yamanashi', 'Chuo'): ['', '', '', '', '', None, 0, 38, 85, 'JP'],
+#     ('Japan', 'Ibaraki', 'Tokai'): ['', '', '', '', '', None, 0, 38, 52, 'JP'],
+#     ('Japan', 'Kagoshima', 'Izumi'): ['', '', '', '', '', None, 0, 38, 56, 'JP'],
+#     ('Japan', 'Nagasaki', 'Tsushima'): ['', '', '', '', '', None, 0, 38, 56, 'JP'],
+#     ('Japan', 'Hiroshima', 'Miyoshi'): ['', '', '', '', '', None, 0, 38, 49, 'JP'],
+#     ('Japan', 'Hiroshima', 'Fuchu'): ['', '', '', '', '', None, 0, 38, 49, 'JP'],
+#     ('Japan', 'Saitama', 'Miyoshi'): ['', '', '', '', '', None, 0, 38, 73, 'JP'],
+#     ('Japan', 'Gunma', 'Numata'): ['', '', '', '', '', None, 0, 38, 48, 'JP'],
+#     ('Japan', 'Ibaraki', 'Ibaraki'): ['', '', '', '', '', None, 0, 38, 52, 'JP']
+# }
+
 
 class GeneralVponGeoService:
-    tag_label = ['Province', 'Township', 'District', 'Prefecture']
 
     def generate(self, google_geo_dto_list: list, vpon_geo_list: list, country_code: str):
         log.info(

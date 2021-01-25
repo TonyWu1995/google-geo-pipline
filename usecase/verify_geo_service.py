@@ -9,9 +9,6 @@ log = logging.getLogger(__name__)
 
 class VerifyGeoService:
 
-    def __int__(self):
-        pass
-
     def verify(self, vpon_geo_domain_list, prebid_list: list):
         log.info("verify() vpon_geo_domain_list size={} prebid_list size={}".format(len(vpon_geo_domain_list),
                                                                                     len(prebid_list)))
